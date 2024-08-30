@@ -9,28 +9,31 @@
 // completely copied and encapsulated by the Bagel class.
 //
 
-class Bagel {
+class Bagel
+{
 public:
-  Bagel(std::set<std::string> ts) : toppings_(std::move(ts)) {}
+    Bagel(std::set<std::string> ts) : toppings_(std::move(ts))
+    {
+    }
 
 private:
-  std::set<std::string> toppings_;
+    std::set<std::string> toppings_;
 };
 
-TEST(ValueSemantics, CreateBagels) {
+TEST(ValueSemantics, CreateBagels)
+{
+    auto t = std::set<std::string>{};
+    t.insert("salt");
+    auto a = Bagel{t};
 
-  auto t = std::set<std::string>{};
-  t.insert("salt");
-  auto a = Bagel{t};
+    // ‘a’ is not affected
+    // when adding pepper
+    t.insert("pepper");
 
-  // ‘a’ is not affected
-  // when adding pepper
-  t.insert("pepper");
+    // ‘a’ will have salt
+    // ‘b’ will have salt & pepper
+    auto b = Bagel{t};
 
-  // ‘a’ will have salt
-  // ‘b’ will have salt & pepper
-  auto b = Bagel{t};
-
-  // No bagel is affected
-  t.insert("oregano");
+    // No bagel is affected
+    t.insert("oregano");
 }
