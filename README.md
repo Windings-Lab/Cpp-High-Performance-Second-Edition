@@ -62,6 +62,14 @@ Build `ALL_BUILD` project, and as a result all other projects will be built auto
 
 Build `RUN_TESTS` project, and as a result all other projects will be executed. The result of running the tests will be printed to the output window.
 
+### CLion with CMake
+You can use vcpkg with CMake variables:
+```
+-DCMAKE_TOOLCHAIN_FILE=<vcpkg-path>\scripts\buildsystems\vcpkg.cmake
+-DBUILD_SHARED_LIBS=OFF
+-DVCPKG_TARGET_TRIPLET="x64-windows-static-md"
+```
+
 ## Build instructions for macOS/Clang
 The examples have been compiled and verified on macOS Catalina using clang 11. The installation instructions assume that you have installed the package manager [Homebrew](https://brew.sh).
 
